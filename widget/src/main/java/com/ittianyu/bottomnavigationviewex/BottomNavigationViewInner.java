@@ -5,12 +5,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.internal.ThemeEnforcement;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
@@ -20,6 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.TintTypedArray;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.internal.ThemeEnforcement;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -64,12 +66,12 @@ public class BottomNavigationViewInner extends BottomNavigationView {
     public BottomNavigationViewInner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TintTypedArray a = ThemeEnforcement.obtainTintedStyledAttributes(context, attrs,
-                android.support.design.R.styleable.BottomNavigationView,
-                defStyleAttr, android.support.design.R.style.Widget_Design_BottomNavigationView,
-                new int[]{android.support.design.R.styleable.BottomNavigationView_itemTextAppearanceInactive,
-                        android.support.design.R.styleable.BottomNavigationView_itemTextAppearanceActive});
+                R.styleable.BottomNavigationView,
+                defStyleAttr, R.style.Widget_Design_BottomNavigationView,
+                new int[]{R.styleable.BottomNavigationView_itemTextAppearanceInactive,
+                        R.styleable.BottomNavigationView_itemTextAppearanceActive});
         // clear if you don't have set item icon tint list
-        if (!a.hasValue(android.support.design.R.styleable.BottomNavigationView_itemIconTint)) {
+        if (!a.hasValue(R.styleable.BottomNavigationView_itemIconTint)) {
             clearIconTintColor();
         }
         a.recycle();
@@ -314,10 +316,9 @@ public class BottomNavigationViewInner extends BottomNavigationView {
     }
 
     /**
+     * @param enable It will has a shift animation if true. Otherwise all items are the same width.
      * @Deprecated use {@link #setLabelVisibilityMode }
      * enable the shifting mode for navigation
-     *
-     * @param enable It will has a shift animation if true. Otherwise all items are the same width.
      */
     @Deprecated
     public BottomNavigationViewInner enableShiftingMode(boolean enable) {
@@ -338,10 +339,9 @@ public class BottomNavigationViewInner extends BottomNavigationView {
     }
 
     /**
+     * @param enable It will has a shift animation for item if true. Otherwise the item text always be shown.
      * @Deprecated use {@link #setItemHorizontalTranslationEnabled(boolean)}
      * enable the shifting mode for each item
-     *
-     * @param enable It will has a shift animation for item if true. Otherwise the item text always be shown.
      */
     @Deprecated
     public BottomNavigationViewInner enableItemShiftingMode(boolean enable) {
@@ -464,13 +464,14 @@ public class BottomNavigationViewInner extends BottomNavigationView {
     /**
      * The lib has a default icon tint color. You can call this method to clear it if no need.
      * It usually used when you set two image for item.
+     *
      * @return
      */
     public BottomNavigationViewInner clearIconTintColor() {
         getBottomNavigationMenuView().setIconTintList(null);
         return this;
     }
-    
+
     /**
      * get private mButtons in mMenuView
      *
@@ -649,10 +650,10 @@ public class BottomNavigationViewInner extends BottomNavigationView {
     /**
      * set all item ImageView size
      *
-     * @param dpSize  in dp
+     * @param dpSize in dp
      */
     public BottomNavigationViewInner setIconSize(float dpSize) {
-        setItemIconSize(dp2px(getContext(),dpSize));
+        setItemIconSize(dp2px(getContext(), dpSize));
         return this;
     }
 
